@@ -35,7 +35,7 @@ class CustomerSuccessBalancing
   end
 
   def available_customers_success
-    return @customer_success if @away_customer_success.blank?
+    return @customer_success if @away_customer_success.empty?
 
     @customer_success.reject {|customer_success| @away_customer_success.include? customer_success[:id]}
   end
@@ -45,7 +45,7 @@ class CustomerSuccessBalancing
   end
 
   def ordered_customers_by_score
-    @ordered_customers_by_score ||= @customers.blank? ? [] : order_by_score(@customers)
+    @ordered_customers_by_score ||= @customers.empty? ? [] : order_by_score(@customers)
   end
 
   def order_by_score(dataObjects)
