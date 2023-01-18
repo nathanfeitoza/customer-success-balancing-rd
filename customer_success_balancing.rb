@@ -38,11 +38,27 @@ class CustomerSuccessBalancing
   def distribute_customers_to_customers_success
     ordered_customers_success_by_score.map.with_index do |customer_success, index|
       previous_customer_sucess = index.zero? ? nil : ordered_customers_success_by_score[index - 1]
-      customers = []
+      customers = fetch_customers_by_customer_success(customer_success, previous_customer_sucess)
       customer_success[:customers] = customers
 
       customer_success
     end
+  end
+
+  def fetch_customers_by_customer_success(customer_success, previous_customer_sucess)
+    ordered_customers_by_score.select do |customer|
+      match_customer_with_customer_success(
+        customer,
+        customer_success,
+        previous_customer_sucess
+      )
+    end
+  end
+
+  def match_customer_with_customer_success(customer, customer_success, previous_customer_sucess)
+    return customer[:score] <= customer_success[:score] if previous_customer_sucess.nil?
+
+    customer[:score] <= customer_success[:score] && customer[:score] > previous_customer_sucess[:score]
   end
 end
 
