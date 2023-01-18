@@ -1,5 +1,5 @@
-# Resolução do desafio CustomerSuccess Balancing
-
+[![Ruby](https://github.com/nathanfeitoza/customer-success-balancing-rd/actions/workflows/test.yml/badge.svg)](https://github.com/nathanfeitoza/customer-success-balancing-rd/actions/workflows/test.yml)
+# Solving the CustomerSuccess Balancing Challenge
 ## What is the challenge?
 
 The challenge is to create a system to balance customers for customer success. So some rules have to be respected such as: customer level, customer success level, how much each customer success can and cannot serve.
