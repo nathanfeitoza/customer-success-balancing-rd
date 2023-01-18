@@ -14,7 +14,7 @@ After finalizing the selection of customers for the customer success, we then ha
 
 ## How to run the test
 
-In terminal, execute the commands below:
+In the terminal, run the command below:
 
 ```
 ruby customer_success_balancing.rb
