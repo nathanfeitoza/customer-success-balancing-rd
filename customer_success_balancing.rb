@@ -10,7 +10,24 @@ class CustomerSuccessBalancing
 
   # Returns the ID of the customer success with most customers
   def execute
-    # Write your solution here
+    get_customer_success_with_most_customers
+  end
+
+  def get_customer_success_with_most_customers
+    _, most_customers = group_by_customer_success_services
+
+    return 0 unless most_customers.count == 1
+
+    most_customers.first[:id]
+  end
+
+  def group_by_customer_success_services
+    return [] if services_balanced.empty?
+
+    services_balanced
+      .group_by { |service_balanced| service_balanced[:customers].count }
+      .sort_by {|service_group| -service_group.first}
+      .first
   end
 
   def services_balanced
