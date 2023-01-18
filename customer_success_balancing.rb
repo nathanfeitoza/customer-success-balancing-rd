@@ -13,6 +13,10 @@ class CustomerSuccessBalancing
     # Write your solution here
   end
 
+  def services_balanced
+    @services_balanced ||= distribute_customers_to_customers_success
+  end
+
   def available_customers_success
     return @customer_success if @away_customer_success.blank?
 
@@ -29,6 +33,16 @@ class CustomerSuccessBalancing
 
   def order_by_score(dataObjects)
     dataObjects.sort_by {|dataObject| dataObject[:score]}
+  end
+
+  def distribute_customers_to_customers_success
+    ordered_customers_success_by_score.map.with_index do |customer_success, index|
+      previous_customer_sucess = index.zero? ? nil : ordered_customers_success_by_score[index - 1]
+      customers = []
+      customer_success[:customers] = customers
+
+      customer_success
+    end
   end
 end
 
