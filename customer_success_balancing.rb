@@ -12,6 +12,24 @@ class CustomerSuccessBalancing
   def execute
     # Write your solution here
   end
+
+  def available_customers_success
+    return @customer_success if @away_customer_success.blank?
+
+    @customer_success.reject {|customer_success| @away_customer_success.include? customer_success[:id]}
+  end
+
+  def ordered_customers_success_by_score
+    @ordered_customers_success_by_score ||= order_by_score(available_customers_success)
+  end
+
+  def ordered_customers_by_score
+    @ordered_customers_by_score ||= @customers.blank? ? [] : order_by_score(@customers)
+  end
+
+  def order_by_score(dataObjects)
+    dataObjects.sort_by {|dataObject| dataObject[:score]}
+  end
 end
 
 class CustomerSuccessBalancingTests < Minitest::Test
